@@ -391,10 +391,12 @@ window.addEventListener("load", () => {
       img.src = unlockedPath;
       img.classList.remove("locked");
       img.classList.add("unlocked");
+      learnReduceLightPollution();
     }
   });
   // Turn off reload flag after a short delay
   setTimeout(() => (pageJustLoaded = false), 500);
+    learnReduceLightPollution();
 });
 
 function showCenteredPopup(message, color = "rgba(42, 122, 190, 0.95)") {
@@ -487,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("scroll", () => {
   const facts = document.querySelectorAll(".fact");
   const triggerBottom = window.innerHeight * 0.85;
+  learnReduceLightPollution();
 
   facts.forEach(fact => {
     const factTop = fact.getBoundingClientRect().top;
@@ -538,6 +541,19 @@ async function sendMessage() {
     chatLog.innerHTML += `<div class='ai-msg'>⚠️ Sorry, I couldn’t connect to the AI server.</div>`;
   }
 }
+// Unlock Planet Protector when user scrolls to map
+window.addEventListener("scroll", () => {
+  const mapSection = document.getElementById("maps");
+  const sectionTop = mapSection.getBoundingClientRect().top;
+  const triggerPoint = window.innerHeight * 0.8;
+
+
+
+  if (sectionTop < triggerPoint) {
+    viewMap(); // unlocks Planet Protector
+  }
+});
+
 </script>
 </body>
 </html>
