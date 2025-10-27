@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hidden Sky</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+<nav>
+  <div class="menu-toggle" id="menu-toggle">☰</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">HOME</a></li>
+    <li><a href="#help">HOW TO HELP</a></li>
+    <li><a href="#maps">MAPS</a></li>
+    <li><a href="#light-check">LIGHT CHECK</a></li>
+    <li><a href="#ai-chat">AI CHAT</a></li>
+    <li><a href="#fun-facts">FUN FACTS</a></li>
+    <li><a href="#badges">BADGES</a></li>
+    <li><a href="#resources">RESOURCES</a></li>
+  </ul>
+</nav>
+
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h2>WELCOME TO</h2>
+    <h1>THE HIDDEN SKY</h1>
+    <p>Learn about light pollution and the importance of environmental conservation!</p>
+    <p>Light pollution is a real issue — altering the lives of hundreds of animals. See what you can do to help!</p>
+  </section>
+
+  <!-- How to Help Section -->
+  <section id="help" class="info-section">
+    <div class="info-text">
+      <p>According to the National Health Institute,</p>
+      <h2>UP TO 90% OF TURTLE HATCHLINGS CAN BE MISLEADED BY ARTIFICIAL LIGHT.</h2>
+      <p>
+        Light pollution is a real problem, harming many animals that are confused
+        by our manmade bright lights — but there's an easy fix!
+      </p>
+    </div>
+    <div class="info-image">
+      <img src="https://cdn.pixabay.com/photo/2019/05/31/02/52/turtle-4241313_1280.jpg" alt="Turtle hatchling on beach">
+    </div>
+  </section>
+
+  <!-- Ways to Stop Section -->
+  <section id="ways-to-stop" class="stop-section">
+    <h2>WAYS TO STOP LIGHT POLLUTION</h2>
+    <div class="stop-container">
+      <div class="stop-card">
+        <img src="https://cdn.pixabay.com/photo/2013/07/18/14/51/ceiling-163866_1280.jpg" alt="Light fixtures">
+        <h3>CHANGE LIGHT FIXTURES</h3>
+        <p>Switch to warm toned lights, and adjust your fixtures so that lights point down, instead of aiming towards the sky. Using blinds is a great way to help as well!</p>
+      </div>
+      <div class="stop-card">
+        <img src="http://cdn.pixabay.com/photo/2016/10/27/20/25/light-bulb-1776372_1280.jpg" alt="LED light bulb">
+        <h3>ENVIRONMENTAL LOBBYING</h3>
+        <p>Contact local authorities and support dark sky initiatives to try to get the word across!</p>
+      </div>
+      <div class="stop-card">
+        <img src="https://cdn.pixabay.com/photo/2017/11/09/10/48/turn-on-2933029_1280.jpg" alt="Light switch">
+        <h3>TURN OFF LIGHTS AT NIGHT</h3>
+        <p>If you live by the coastline, turning lights off can save hundreds of baby turtles and allow them to follow their natural instinct and swim to the ocean, instead of crawling down streets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Maps Section -->
+  <section id="maps" class="maps-section">
+    <h2>LIGHT POLLUTION MAP</h2>
+    <p>Explore how bright the night skies are around the world — and see how light pollution affects your area.</p>
+    <button id="toggleBtn" onclick="toggleNASA()">Hide Night Lights</button>
+    <div id="map"></div>
+  </section>
+
+  <!-- Map Scripts -->
+<script>
+  let map;
+  let nightOverlay;
+  let nasaVisible = true;
+
+  function initMap() {
+    const florida = { lat: 27.6648, lng: -81.5158 };
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 6, 
+      center: florida,
+      mapTypeId: "roadmap",
+      styles: [
+        { elementType: "geometry", stylers: [{ color: "#0d0d0d" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#e0e0e0" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#000000" }] },
+        { featureType: "water", stylers: [{ color: "#0a1b2f" }] }
+      ]
+    });
+  }
+  function initMap() {
+  const florida = { lat: 27.6648, lng: -81.5158 };
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 6,
+    center: florida,
+    mapTypeId: "roadmap",
+  });
+
+  viewMap();
+}
+
+nightOverlay = new google.maps.ImageMapType({
+  getTileUrl: function (coord, zoom) {
+    return `https://corsproxy.io/?https://tiles.lightpollutionmap.info/tiles/VIIRS_2019/${zoom}/${coord.x}/${coord.y}.png`;
+  },
+  tileSize: new google.maps.Size(256, 256),
+  opacity: 0.9,  
+  name: "Light Pollution (VIIRS)"
+});
+map.overlayMapTypes.push(nightOverlay);
+
+  function toggleNASA() {
+    nasaVisible = !nasaVisible;
+    const mapDiv = document.getElementById("map");
+
+    if (nasaVisible) {
+      map.overlayMapTypes.push(nightOverlay);
+      document.getElementById("toggleBtn").innerText = "Hide Night Lights";
+      mapDiv.style.filter = "brightness(1.3) contrast(1.2)";
+    } else {
+      map.overlayMapTypes.clear();
+      document.getElementById("toggleBtn").innerText = "Show Night Lights";
+      mapDiv.style.filter = "brightness(1) contrast(1)";
+    }
+  }
+  document.getElementById("map").style.filter = 
+  "brightness(1.5) contrast(1.5) sepia(0.6) hue-rotate(10deg)";
+</script>
+
+<!-- Google Maps API -->
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmfFMIi3fe2JjdCN15SYqsoht6tPgeKNk&callback=initMap">
+</script>
+
+<!--  Light Check Section -->
+<section id="light-check" class="light-check-section">
+  <h2>LIGHT CHECK</h2>
+  <p>Check how bright your surroundings are — and see if your night sky is healthy!</p>
+
+  <div class="check-container">
+    <button id="checkLightBtn" onclick="startLightCheck()">Start Light Check</button>
+
+    <div class="gauge">
+      <svg viewBox="0 0 36 36">
+        <path
+          class="circle-bg"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+        <path
+          class="circle"
+          stroke-dasharray="0, 100"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+      </svg>
+      <div id="luxValue" class="gauge-text">-- lux</div>
+    </div>
+
+    <p id="lightValue">Waiting to start...</p>
+  </div>
+</section>
+
+<script>
+function updateGauge(lux) {
+  const circle = document.querySelector(".circle");
+  const luxText = document.getElementById("luxValue");
+  const percent = Math.min((lux / 1000) * 100, 100);
+  circle.style.strokeDasharray = `${percent}, 100`;
+  luxText.textContent = `${lux.toFixed(1)} lux`;
+
+  // Color gradient
+  if (lux < 1) circle.style.stroke = "#1aff1a";
+  else if (lux < 10) circle.style.stroke = "#ffff4d";
+  else if (lux < 100) circle.style.stroke = "#ffa31a";
+  else circle.style.stroke = "#ff3333";
+}
+
+async function startLightCheck() {
+  const lightDisplay = document.getElementById("lightValue");
+  lightDisplay.textContent = "🔍 Starting Light Check...";
+
+  if ("AmbientLightSensor" in window) {
+    try {
+      const sensor = new AmbientLightSensor();
+      sensor.onreading = () => {
+        const lux = sensor.illuminance;
+        updateGauge(lux);
+        let msg =
+          lux < 1
+            ? "Excellent — dark sky zone!"
+            : lux < 10
+            ? "Mild light pollution."
+            : lux < 100
+            ? "Urban glow."
+            : "High light pollution!";
+        lightDisplay.innerHTML = msg;
+
+        // Unlock Milky Way badge on success
+        completeLightCheck();
+      };
+      sensor.start();
+      return;
+    } catch (err) {
+      console.warn("AmbientLightSensor unavailable:", err);
+    }
+  }
+
+  // Fallback: Use Geolocation + OpenWeatherMap
+  if (!navigator.geolocation) {
+    lightDisplay.textContent = "⚠️ Your browser doesn't support location services.";
+    return;
+  }
+
+  lightDisplay.textContent = "Getting your location...";
+
+  navigator.geolocation.getCurrentPosition(
+    async (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      console.log("Location received:", lat, lon);
+      lightDisplay.textContent = `Location found: ${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+      await fetchLightData(lat, lon, lightDisplay);
+    },
+    (error) => {
+      console.error("Location error:", error);
+      const messages = {
+        1: "Permission denied. Please allow location access.",
+        2: "Position unavailable.",
+        3: "Request timed out.",
+      };
+      lightDisplay.textContent = "⚠️ " + (messages[error.code] || "Unknown error.");
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+async function fetchLightData(lat, lon, lightDisplay) {
+  const apiKey = "AIzaSyCmfFMIi3fe2JjdCN15SYqsoht6tPgeKNk";
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log("Weather data:", data);
+    const clouds = data.clouds?.all || 0;
+    const city = data.name || "your area";
+
+    const lux = 200 - clouds * 2;
+    updateGauge(lux);
+
+    const skyCondition =
+      clouds < 20
+        ? "Clear skies — great visibility!"
+        : clouds < 60
+        ? "Partly cloudy."
+        : "Cloudy — poor visibility.";
+
+    lightDisplay.innerHTML = `Location: ${city}<br> Cloud Cover: ${clouds}%<br>${skyCondition}`;
+
+    // Unlock Milky Way badge
+    completeLightCheck();
+  } catch (err) {
+    console.error("❌ Weather API error:", err);
+    lightDisplay.textContent = "Error getting weather data.";
+  }
+}
+
+/* Badge Unlock Function */
+function completeLightCheck() {
+  unlockBadge("milkyWay", "images/milkyway_unlocked.jpg");
+
+  //Show “Badge Earned” popup
+  const popup = document.createElement("div");
+  popup.textContent = "🏅 You earned the Milky Way Badge!";
+  popup.style.position = "fixed";
+  popup.style.top = "50%";
+  popup.style.left = "50%";
+  popup.style.transform = "translate(-50%, -50%)";
+  popup.style.background = "rgba(42, 122, 190, 0.95)";
+  popup.style.color = "white";
+  popup.style.padding = "20px 40px";
+  popup.style.borderRadius = "15px";
+  popup.style.boxShadow = "0 0 20px #2a7abe";
+  popup.style.fontSize = "1.5rem";
+  popup.style.fontWeight = "bold";
+  popup.style.zIndex = "9999";
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 4000);
+}
+</script>
+
+
+<section id="ai-chat" class="ai-chat-section">
+  <h2>Ask About Light Pollution</h2>
+  <div class="chatbox">
+    <div id="chat-log"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Ask a question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.onload = function() {
+  const chatLog = document.getElementById("chat-log");
+  chatLog.innerHTML = `<div class='ai-msg'>👋 Hi! I'm your Light Pollution Assistant. Ask me anything about light pollution and how it affects our world!</div>`;
+};
+async function sendMessage() {
+  const userInput = document.getElementById("userInput");
+  const chatLog = document.getElementById("chat-log");
+  const message = userInput.value.trim();
+  if (!message) return;
+
+  chatLog.innerHTML += `<div class='user-msg'>${message}</div>`;
+  userInput.value = "";
+  chatLog.scrollTop = chatLog.scrollHeight;
+
+  const response = await fetch("http://127.0.0.1:3000/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await response.json();
+  chatLog.innerHTML += `<div class='ai-msg'>${data.reply}</div>`;
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+</script>
+
+<!-- Fun Facts Section -->
+<section id="fun-facts" class="fun-facts-section">
+  <h2>FUN FACTS:</h2>
+
+  <div class="fact">
+    <h3>LIGHT POLLUTION IS THE FASTEST GROWING TYPE OF POLLUTION ON EARTH.</h3>
+    <p>Scientists estimate it increases by about 10% per year EVERY year worldwide.</p>
+  </div>
+
+  <div class="fact">
+    <h3>MOST PEOPLE HAVE NEVER SEEN THE MILKY WAY GALAXY.</h3>
+    <p>About 80% of Americans live in areas too bright to see it!</p>
+  </div>
+
+  <div class="fact">
+    <h3>THE SKY NEVER REALLY GETS DARK IN CITIES.</h3>
+    <p>Even at midnight, light from buildings bounces off dust and clouds, creating a glowing dome called skyglow.</p>
+  </div>
+
+  <div class="fact">
+    <h3>LIGHT POLLUTION CAN REACH SPACE.</h3>
+    <p>Astronauts on the ISS can easily see city lights from orbit!</p>
+  </div>
+
+  <div class="fact">
+    <h3>THE BRIGHTEST SPOT ON EARTH IS LAS VEGAS.</h3>
+  </div>
+</section>
+<script>
+window.addEventListener("scroll", () => {
+  const facts = document.querySelectorAll(".fact");
+  const triggerBottom = window.innerHeight * 0.85;
+
+  facts.forEach(fact => {
+    const factTop = fact.getBoundingClientRect().top;
+    if (factTop < triggerBottom) {
+      fact.classList.add("visible");
+    }
+  });
+});
+</script>
+<section id="badges" class="badges-section">
+  <h2>Your Badges</h2>
+  <div class="badges-container">
+    <div class="badge" id="milkyWay">
+      <img src="images/milkyway_locked.jpg" alt="Milky Way Badge" class="locked">
+      <h3>Milky Way Explorer</h3>
+      <p>Complete the Light Check.</p>
+    </div>
+
+    <div class="badge" id="galaxy">
+      <img src="images/galaxy_locked.jpg" alt="Galaxy Badge" class="locked">
+      <h3>Galaxy Guardian</h3>
+      <p>Ask the AI about light pollution.</p>
+    </div>
+
+    <div class="badge" id="planet">
+      <img src="images/planet_locked.jpg" alt="Planet Badge" class="locked">
+      <h3>Planet Protector</h3>
+      <p>View the Light Pollution Map.</p>
+    </div>
+
+    <div class="badge" id="stars">
+      <img src="images/stars_locked.jpg" alt="Stars Badge" class="locked">
+      <h3>Starlight Saver</h3>
+      <p>Learn how to reduce light pollution.</p>
+    </div>
+  </div>
+</section>
+
+  </section>
+  <section id="resources" class="resources-section">
+  <h2>LEARN MORE</h2>
+
+  <div class="resources-container">
+    <div class="column">
+      <h3>WEBSITES</h3>
+      <a href="https://www.darksky.org/" target="_blank">Darksky</a><br>
+      <a href="https://education.nationalgeographic.org/resource/light-pollution/" target="_blank">How to dim light pollution</a><br>
+      <a href="https://www.globeatnight.org/" target="_blank">Globe at Night</a>
+    </div>
+
+    <div class="column">
+      <h3>BOOKS</h3>
+      <p>Light Pollution Handbook</p>
+      <p>Saving the Night: How Light Pollution is Harming Life on Earth</p>
+      <p>The End of Night: Searching for Natural Darkness in an Age of Artificial Light</p>
+      <p>Natural Darkness in an Age of Artificial Light</p>
+    </div>
+
+    <div class="column">
+      <h3>ARTICLES</h3>
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2627884/" target="_blank">Missing the Dark: Health Effects of Light Pollution</a><br>
+      <a href="https://www.sciencedirect.com/science/article/pii/S0022098118301687" target="_blank">Impacts of artificial light at night in marine ecosystems — a review</a><br>
+      <a href="https://www.frontiersin.org/articles/10.3389/frscp.2020.00026/full" target="_blank">Light Pollution and its impact on human health and wildlife</a>
+    </div>
+  </div>
+<script>
+function unlockBadge(badgeId, unlockedImagePath) {
+  const badge = document.getElementById(badgeId);
+  if (!badge) return;
+  const img = badge.querySelector("img");
+  img.src = unlockedImagePath;
+  img.classList.remove("locked");
+  img.classList.add("unlocked");
+  localStorage.setItem(badgeId, "unlocked");
+}
+
+// Restore unlocked badges on load
+window.addEventListener("load", () => {
+  const badges = document.querySelectorAll(".badge");
+  badges.forEach(badge => {
+    const id = badge.id;
+    if (localStorage.getItem(id) === "unlocked") {
+      const img = badge.querySelector("img");
+      const unlockedPath = img.src.replace("_locked", "_unlocked");
+      img.src = unlockedPath;
+      img.classList.remove("locked");
+      img.classList.add("unlocked");
+    }
+  });
+});
+
+//  Badge triggers
+function completeLightCheck() {
+  unlockBadge("milkyWay", "images/milkyway_unlocked.jpg");
+}
+
+function askAIQuestion() {
+  unlockBadge("galaxy", "images/galaxy_unlocked.jpg");
+}
+
+function viewMap() {
+  unlockBadge("planet", "images/planet_unlocked.jpg");
+}
+
+function learnReduceLightPollution() {
+  unlockBadge("stars", "images/stars_unlocked.jpg");
+}
+window.addEventListener("scroll", () => {
+  const section = document.getElementById("ways-to-stop");
+  const rect = section.getBoundingClientRect();
+
+  if (rect.top < window.innerHeight * 0.75 && !localStorage.getItem("stars")) {
+    learnReduceLightPollution();
+  }
+});
+</script>
+<script>
+function completeLightCheck() {
+  unlockBadge("milkyWay", "images/milkyway_unlocked.jpg", "Milky Way Explorer");
+}
+
+function askAIQuestion() {
+  unlockBadge("galaxy", "images/galaxy_unlocked.jpg", "Galaxy Guardian");
+}
+
+function viewMap() {
+  unlockBadge("planet", "images/planet_unlocked.jpg", "Planet Protector");
+}
+
+function learnReduceLightPollution() {
+  unlockBadge("stars", "images/stars_unlocked.jpg", "Starlight Saver");
+}
+</script>
+
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 The Hidden Sky. All rights reserved.</p>
+  </footer>
+
+<div id="badgePopup" class="badge-popup">
+  <div class="popup-content">
+    <h2>🏅 Badge Earned!</h2>
+    <img id="earnedBadgeImg" src="" alt="Badge Earned">
+    <p id="earnedBadgeName"></p>
+  </div>
+</div>
+
+<script>
+function showBadgePopup(badgeName, imagePath) {
+  const popup = document.getElementById("badgePopup");
+  const img = document.getElementById("earnedBadgeImg");
+  const name = document.getElementById("earnedBadgeName");
+
+  img.src = imagePath;
+  name.textContent = badgeName;
+
+  popup.classList.add("show");
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 3000);
+}
+function unlockBadge(badgeId, unlockedImagePath, badgeName) {
+  const badge = document.getElementById(badgeId);
+  const img = badge.querySelector("img");
+
+  if (localStorage.getItem(badgeId) === "unlocked") return;
+
+  img.src = unlockedImagePath;
+  img.classList.remove("locked");
+  img.classList.add("unlocked");
+  localStorage.setItem(badgeId, "unlocked");
+
+  showBadgePopup(badgeName, unlockedImagePath);
+}
+</script>
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>
+
