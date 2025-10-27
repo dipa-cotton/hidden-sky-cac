@@ -318,10 +318,12 @@ function completeLightCheck() {
 </section>
 
 <script>
+
   window.onload = function() {
   const chatLog = document.getElementById("chat-log");
   chatLog.innerHTML = `<div class='ai-msg'>👋 Hi! I'm your Light Pollution Assistant. Ask me anything about light pollution and how it affects our world!</div>`;
 };
+let badgeUnlocked = false;
 async function sendMessage() {
   const userInput = document.getElementById("userInput");
   const chatLog = document.getElementById("chat-log");
