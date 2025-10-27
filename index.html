@@ -378,7 +378,7 @@ async function fetchLightData(lat, lon, lightDisplay) {
   </div>
 <script>
 // Track if this is a fresh page reload
-let pageJustLoaded = true;
+let pageJustLoaded = false;
 
 // ✅ Restore unlocked badges when page loads
 window.addEventListener("load", () => {
@@ -522,12 +522,17 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    // Display AI message
+    // Display AI reply
     chatLog.innerHTML += `<div class='ai-msg'>${data.reply}</div>`;
     chatLog.scrollTop = chatLog.scrollHeight;
 
-    // 🏅 Unlock Galaxy Guardian badge when user asks AI
-    askAIQuestion();
+    // 🏅 Unlock Galaxy Guardian badge (with popup if not just reloaded)
+    if (typeof askAIQuestion === "function") {
+      askAIQuestion();
+    } else {
+      console.warn("⚠️ askAIQuestion() not found");
+    }
+
   } catch (error) {
     console.error("AI Chat Error:", error);
     chatLog.innerHTML += `<div class='ai-msg'>⚠️ Sorry, I couldn’t connect to the AI server.</div>`;
