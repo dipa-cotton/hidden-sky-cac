@@ -341,6 +341,11 @@ async function sendMessage() {
   const data = await response.json();
   chatLog.innerHTML += `<div class='ai-msg'>${data.reply}</div>`;
   chatLog.scrollTop = chatLog.scrollHeight;
+
+    if (!badgeUnlocked) {
+    askAIQuestion();
+    badgeUnlocked = true;
+  }
 }
 function askAIQuestion() {
   unlockBadge("galaxy", "images/galaxy_unlocked.jpg");
