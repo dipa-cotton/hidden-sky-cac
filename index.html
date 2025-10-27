@@ -320,19 +320,6 @@ async function fetchLightData(lat, lon, lightDisplay) {
     <h3>THE BRIGHTEST SPOT ON EARTH IS LAS VEGAS.</h3>
   </div>
 </section>
-<script>
-window.addEventListener("scroll", () => {
-  const facts = document.querySelectorAll(".fact");
-  const triggerBottom = window.innerHeight * 0.85;
-
-  facts.forEach(fact => {
-    const factTop = fact.getBoundingClientRect().top;
-    if (factTop < triggerBottom) {
-      fact.classList.add("visible");
-    }
-  });
-});
-</script>
 <section id="badges" class="badges-section">
   <h2>Your Badges</h2>
   <div class="badges-container">
@@ -390,102 +377,10 @@ window.addEventListener("scroll", () => {
     </div>
   </div>
 <script>
-
-
-// Restore unlocked badges on load
-window.addEventListener("load", () => {
-  const badges = document.querySelectorAll(".badge");
-  badges.forEach(badge => {
-    const id = badge.id;
-    if (localStorage.getItem(id) === "unlocked") {
-      const img = badge.querySelector("img");
-      const unlockedPath = img.src.replace("_locked", "_unlocked");
-      img.src = unlockedPath;
-      img.classList.remove("locked");
-      img.classList.add("unlocked");
-      // Restore unlocked badges on load
-window.addEventListener("load", () => {
-  const badges = document.querySelectorAll(".badge");
-  badges.forEach(badge => {
-    const id = badge.id;
-    if (localStorage.getItem(id) === "unlocked") {
-      const img = badge.querySelector("img");
-      const unlockedPath = img.src.replace("_locked", "_unlocked");
-      img.src = unlockedPath;
-      img.classList.remove("locked");
-      img.classList.add("unlocked");
-    }
-  });
-
-  // 🧩 Prevent badge popups on page reload
-  document.body.classList.add("page-loaded");
-});
-
-    }
-  });
-});
-
-//  Badge triggers
-function completeLightCheck() {
-  unlockBadge("milkyWay", "images/milkyway_unlocked.jpg");
-}
-
-function askAIQuestion() {
-  unlockBadge("galaxy", "images/galaxy_unlocked.jpg");
-}
-
-function viewMap() {
-  unlockBadge("planet", "images/planet_unlocked.jpg");
-}
-
-function learnReduceLightPollution() {
-  unlockBadge("stars", "images/stars_unlocked.jpg");
-}
-window.addEventListener("scroll", () => {
-  const section = document.getElementById("ways-to-stop");
-  const rect = section.getBoundingClientRect();
-})
-  if (rect.top < window.innerHeight * 0.75 && !localStorage.getItem("stars")) {
-    learnReduceLightPollution();
-  }
-</script>
-<script>
-function completeLightCheck() {
-  unlockBadge("milkyWay", "images/milkyway_unlocked.jpg", "Milky Way Explorer");
-}
-
-function askAIQuestion() {
-  unlockBadge("galaxy", "images/galaxy_unlocked.jpg", "Galaxy Guardian");
-}
-
-function viewMap() {
-  unlockBadge("planet", "images/planet_unlocked.jpg", "Planet Protector");
-}
-
-function learnReduceLightPollution() {
-  unlockBadge("stars", "images/stars_unlocked.jpg", "Starlight Saver");
-}
-</script>
-
-</section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 The Hidden Sky. All rights reserved.</p>
-  </footer>
-
-<div id="badgePopup" class="badge-popup">
-  <div class="popup-content">
-    <h2>🏅 Badge Earned!</h2>
-    <img id="earnedBadgeImg" src="" alt="Badge Earned">
-    <p id="earnedBadgeName"></p>
-  </div>
-</div>
-<script>
 // Track if this is a fresh page reload
 let pageJustLoaded = true;
 
-// Restore badges when page loads
+// ✅ Restore unlocked badges when page loads
 window.addEventListener("load", () => {
   const badges = document.querySelectorAll(".badge");
   badges.forEach(badge => {
@@ -498,7 +393,7 @@ window.addEventListener("load", () => {
       img.classList.add("unlocked");
     }
   });
-  // Turn off reload protection after 0.5s
+  // Turn off reload flag after a short delay
   setTimeout(() => (pageJustLoaded = false), 500);
 });
 
@@ -556,7 +451,7 @@ function unlockBadge(badgeId, unlockedImagePath, badgeName) {
   }
 }
 
-// Badge triggers
+// ✅ Badge triggers
 function completeLightCheck() {
   unlockBadge("milkyWay", "images/milkyway_unlocked.jpg", "Milky Way Explorer");
 }
@@ -573,7 +468,3 @@ function learnReduceLightPollution() {
   unlockBadge("stars", "images/stars_unlocked.jpg", "Starlight Saver");
 }
 </script>
-
-</body>
-</html>
-
