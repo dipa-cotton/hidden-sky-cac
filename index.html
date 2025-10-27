@@ -496,5 +496,43 @@ window.addEventListener("scroll", () => {
   });
 });
 </script>
+<script>
+window.onload = function() {
+  const chatLog = document.getElementById("chat-log");
+  chatLog.innerHTML = `<div class='ai-msg'>👋 Hi! I'm your Light Pollution Assistant. Ask me anything about light pollution and how it affects our world!</div>`;
+};
+
+async function sendMessage() {
+  const userInput = document.getElementById("userInput");
+  const chatLog = document.getElementById("chat-log");
+  const message = userInput.value.trim();
+  if (!message) return;
+
+  // Show user's message
+  chatLog.innerHTML += `<div class='user-msg'>${message}</div>`;
+  userInput.value = "";
+  chatLog.scrollTop = chatLog.scrollHeight;
+
+  try {
+    const response = await fetch("https://hidden-sky-cac-backend.onrender.com/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    // Display AI message
+    chatLog.innerHTML += `<div class='ai-msg'>${data.reply}</div>`;
+    chatLog.scrollTop = chatLog.scrollHeight;
+
+    // 🏅 Unlock Galaxy Guardian badge when user asks AI
+    askAIQuestion();
+  } catch (error) {
+    console.error("AI Chat Error:", error);
+    chatLog.innerHTML += `<div class='ai-msg'>⚠️ Sorry, I couldn’t connect to the AI server.</div>`;
+  }
+}
+</script>
 </body>
 </html>
