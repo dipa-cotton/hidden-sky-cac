@@ -52,4 +52,5 @@ app.post("/chat", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("✅ Hidden Sky backend is running!");
 });
-app.listen(3000, () => console.log("✅ Light Pollution AI running on http://127.0.0.1:3000"));
+app.listen(3000, () => console.log("✅ Server running on port 3000"));
+
