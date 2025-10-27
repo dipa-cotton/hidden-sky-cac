@@ -482,5 +482,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+<script>
+// Show fun facts when they scroll into view
+window.addEventListener("scroll", () => {
+  const facts = document.querySelectorAll(".fact");
+  const triggerBottom = window.innerHeight * 0.85;
+
+  facts.forEach(fact => {
+    const factTop = fact.getBoundingClientRect().top;
+    if (factTop < triggerBottom) {
+      fact.classList.add("visible");
+    }
+  });
+});
+</script>
 </body>
 </html>
