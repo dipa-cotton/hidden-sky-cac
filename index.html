@@ -541,18 +541,21 @@ async function sendMessage() {
     chatLog.innerHTML += `<div class='ai-msg'>⚠️ Sorry, I couldn’t connect to the AI server.</div>`;
   }
 }
-// Unlock Planet Protector when user scrolls to map
+let planetUnlocked = false; // ensure it triggers only once
+
 window.addEventListener("scroll", () => {
   const mapSection = document.getElementById("maps");
+  if (!mapSection || planetUnlocked) return;
+
   const sectionTop = mapSection.getBoundingClientRect().top;
-  const triggerPoint = window.innerHeight * 0.8;
+  const triggerPoint = window.innerHeight * 0.6; // scroll 60% down the viewport
 
-
-
-  if (sectionTop < triggerPoint) {
-    viewMap(); // unlocks Planet Protector
+  if (sectionTop < triggerPoint && sectionTop > 0) {
+    planetUnlocked = true;
+    viewMap(); // unlocks Planet Protector only once, when actually scrolled down
   }
 });
+
 
 </script>
 </body>
