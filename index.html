@@ -595,6 +595,24 @@ window.addEventListener("load", () => {
       img.src = unlockedPath;
       img.classList.remove("locked");
       img.classList.add("unlocked");
+      // Restore unlocked badges on load
+window.addEventListener("load", () => {
+  const badges = document.querySelectorAll(".badge");
+  badges.forEach(badge => {
+    const id = badge.id;
+    if (localStorage.getItem(id) === "unlocked") {
+      const img = badge.querySelector("img");
+      const unlockedPath = img.src.replace("_locked", "_unlocked");
+      img.src = unlockedPath;
+      img.classList.remove("locked");
+      img.classList.add("unlocked");
+    }
+  });
+
+  // 🧩 Prevent badge popups on page reload
+  document.body.classList.add("page-loaded");
+});
+
     }
   });
 });
@@ -725,6 +743,23 @@ function unlockBadge(badgeId, unlockedImagePath, badgeName) {
   localStorage.setItem(badgeId, "unlocked");
 
   showBadgePopup(badgeName, unlockedImagePath);
+  function unlockBadge(badgeId, unlockedImagePath, badgeName) {
+  const badge = document.getElementById(badgeId);
+  const img = badge.querySelector("img");
+
+  // If already unlocked, do nothing
+  if (localStorage.getItem(badgeId) === "unlocked") return;
+
+  img.src = unlockedImagePath;
+  img.classList.remove("locked");
+  img.classList.add("unlocked");
+  localStorage.setItem(badgeId, "unlocked");
+
+  // ✅ Only show popup if this isn’t a page reload
+  if (!document.body.classList.contains("page-loaded")) return;
+  showCenteredPopup(`You earned the ${badgeName}!`);
+}
+
 }
 </script>
 <script>
